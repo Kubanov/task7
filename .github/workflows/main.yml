@@ -29,3 +29,17 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/task7:latest
+
+  deployAnsible:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ./.github/actions/task8
+      with: 
+        playbook: testplaybook.yml
+        inventory: host
+          
+      
+  
+          
