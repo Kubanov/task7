@@ -30,15 +30,28 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/task7:latest
 
-  deployAnsible:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: ./.github/actions/task8
-      with: 
-        playbook: testplaybook.yml
-        inventory: host
+  deploy:
+   if: github.ref != 'refs/heads/master'
+   runs-on: ubuntu-latest
+   needs: build
+   steps:
+   - name: Checkout code
+     uses: actions/checkout@v2
+   - name: Set up SSH key
+     uses: webfactory/ssh-agent@v0.5.0
+     with:
+       ssh-private-key: ${{ secrets.SSH-PubKey }}
+   - name: Install dependencies
+     run: |
+       sudo apt-get update && \
+       sudo apt-get install -y ansible
+   - name: Deploy app
+     env:
+       DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/task7
+       DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+       DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+     run: |
+       ansible-playbook --user ${{ secrets.SSH-PubKey }} -i inventory playbook.yml
           
       
   
