@@ -40,7 +40,7 @@ jobs:
    - name: Set up SSH key
      uses: webfactory/ssh-agent@v0.5.0
      with:
-       ssh-private-key: ${{ secrets.SSH-PubKey }}
+       ssh-private-key: ${{ secrets.SSH_PUBLICKEY }}
    - name: Install dependencies
      run: |
        sudo apt-get update && \
