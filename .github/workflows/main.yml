@@ -48,8 +48,8 @@ jobs one:
         - 
           name: Deploy app
           env:
-            DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/task7
-            DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+            DOCKER_IMAGE: ${{ secrets.DOCKERHUB_TOKEN }}/task7
+            DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKERHUB_TOKEN }}
             DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 	    run: |
 	    	ansible-playbook --user ${{ secrets.SSH_USER }} -i inventory playbook.yml
