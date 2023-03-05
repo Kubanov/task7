@@ -52,4 +52,4 @@ jobs one:
             DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
 	        DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 	        run: |
-	    	    ansible-playbook --user ${{ secrets.SSH_USER }} -i inventory playbook.yml
+	    	    ansible-playbook --user ${{ secrets.SSH_USER }} -i host.yml tesplaybook.yml
