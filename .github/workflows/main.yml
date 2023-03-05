@@ -45,10 +45,4 @@ jobs one:
           run: |
             sudo apt-get update && \
             sudo apt-get install -y ansible
-        - 
-          name: Deploy app
-          env:
-            DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/task7
-            DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-	    run: |
-	    	ansible-playbook --user ${{ secrets.SSH_USER }} -i inventory playbook.yml
+        
