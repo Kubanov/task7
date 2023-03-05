@@ -50,6 +50,6 @@ jobs one:
           env:
             DOCKER_IMAGE: ${{ secrets.DOCKER_USERNAME }}/task7
             DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-            DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+            DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
 	    run: |
 	    	ansible-playbook --user ${{ secrets.SSH_USER }} -i inventory playbook.yml
