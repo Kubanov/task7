@@ -28,28 +28,3 @@ jobs:
             file: ./Dockerfile
             push: true
             tags: ${{ secrets.DOCKERHUB_USERNAME }}/task7:latest
-jobs one:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-        -
-          name: Checkout
-          uses: actions/checkout@v3
-        -
-          name: Set up SSH key
-          uses: webfactory/ssh-agent@v0.5.0
-          with:
-            ssh-private-key: ${{ secrets.SSH_PRIVATEKEY }}
-        - 
-          name: Install dependencies
-          run: |
-            sudo apt-get update && \
-            sudo apt-get install -y ansible
-        - 
-          name: Deploy app
-          env:
-            DOCKER_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/task7
-            DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-	        DOCKER_REGISTRY_PASSWORD: ${{ secrets.DOCKERHUB_TOKEN }}
-	        run: |
-	    	    ansible-playbook --user ${{ secrets.SSH_USER }} -i host.yml tesplaybook.yml
